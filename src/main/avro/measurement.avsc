@@ -1,0 +1,31 @@
+{
+  "type": "record",
+  "name": "MeasurementAvro",
+  "namespace": "tsdb.measurement",
+  "doc": "Measurements",
+  "fields": [
+    {
+      "name": "metric",
+      "type": "string",
+      "doc": "Metric of measurement (high level grouping of measurements)"
+    },
+    {
+      "name": "tags",
+      "type": {
+        "type": "map",
+        "values": "string"
+      },
+      "doc": "Measurement tags"
+    },
+    {
+      "name": "logtime",
+      "type": "long",
+      "doc": "Time when measurement was created"
+    },
+    {
+      "name": "value",
+      "type": "long",
+      "doc": "Measured value"
+    }
+  ]
+}
