@@ -7,7 +7,8 @@ import tsdb.measurement.MeasurementV1
 import jdk.internal.vm.annotation.Contended
 
 @Contended
-class InterningAvroDeserializerHashMapTags(protected val interner: StringInterner) extends BaseInterningAvroDeserializer {
+class InterningAvroDeserializerHashMapTags(protected val interner: StringInterner)
+    extends BaseInterningAvroDeserializer {
   def deserialize(bytes: Array[Byte]): MeasurementV1 = {
     init(bytes)
     val metric = readString()

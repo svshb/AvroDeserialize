@@ -8,9 +8,10 @@ import tsdb.measurement.MeasurementV2
 import jdk.internal.vm.annotation.Contended
 
 @Contended
-class InterningAvroDeserializerArrayTags(val interner: StringInterner,
-                                         protected val sorter: TagsSorter = InsertionTagsSorter)
-    extends BaseInterningAvroDeserializer {
+class InterningAvroDeserializerArrayTags(
+    val interner: StringInterner,
+    protected val sorter: TagsSorter = InsertionTagsSorter
+) extends BaseInterningAvroDeserializer {
   def deserialize(bytes: Array[Byte]): MeasurementV2 = {
     init(bytes)
     val metric = readString()

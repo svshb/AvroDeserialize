@@ -4,9 +4,9 @@ import org.openjdk.jmh.runner.Runner
 import org.openjdk.jmh.runner.options.{OptionsBuilder, TimeValue}
 
 /**
- * Main for brave souls who can remember to do `sbt compile` every time before running this class.
- * More convenient version of calling JMH.
- */
+  * Main for brave souls who can remember to do `sbt compile` every time before running this class.
+  * More convenient version of calling JMH.
+  */
 object Main {
   def main(args: Array[String]): Unit = {
     val options = new OptionsBuilder()

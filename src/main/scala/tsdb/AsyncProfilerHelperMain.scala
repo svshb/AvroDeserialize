@@ -11,18 +11,18 @@ import tsdb.benchmark_04.{
 import tsdb.measurement.MeasurementsState
 
 /**
- * Helper class to run async-profiler to analyze different benchmarks.
- * Assuming async-profiler is in `./async-profiler` following command can be used
- * to get a flamegraph of currently running method in `./flamegraph.svg`:
- * `./async-profiler/profiler.sh -d 10 -f ./flamegraph.svg $(jps | grep "AsyncProfilerHelperMain" | cut -d" " -f1)`
- * It might be required to run
- *
- * sudo su
- * echo 1 > /proc/sys/kernel/perf_event_paranoid
- * echo 0 > /proc/sys/kernel/kptr_restrict
- *
- * to make it work under Linux.
- */
+  * Helper class to run async-profiler to analyze different benchmarks.
+  * Assuming async-profiler is in `./async-profiler` following command can be used
+  * to get a flamegraph of currently running method in `./flamegraph.svg`:
+  * `./async-profiler/profiler.sh -d 10 -f ./flamegraph.svg $(jps | grep "AsyncProfilerHelperMain" | cut -d" " -f1)`
+  * It might be required to run
+  *
+  * sudo su
+  * echo 1 > /proc/sys/kernel/perf_event_paranoid
+  * echo 0 > /proc/sys/kernel/kptr_restrict
+  *
+  * to make it work under Linux.
+  */
 object AsyncProfilerHelperMain {
   def main(args: Array[String]): Unit = {
     loop1Library()
