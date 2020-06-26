@@ -4,6 +4,8 @@ Code for Deserializing Millions Of Messages Per Second Per Core article.
 
 ### How to run benchmark
 
+JDK11+ is required.
+
 Following command will run all benchmarks for 10 forks, 4 threads, 10 warmup iteration, 30 measure iterations, "Fail on error" enabled and 1 second per warmup/measure iteration:
 
 `sbt 'jmh:run -f 10 -t 4 -wi 10 -i 30 -w 1 -r 1 -foe true .*'`
