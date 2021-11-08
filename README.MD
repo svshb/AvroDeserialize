@@ -1,6 +1,22 @@
 # Avro Deserialize
 
-Code for Deserializing Millions Of Messages Per Second Per Core article.
+Code for Deserializing Millions Of Messages Per Second Per Core article.
+
+The code shows the evolution of deserialization pipeline for Avro messages
+ and is roughly separated into 4 parts:
+1) Baseline implementation using Apache Avro deserializer (`tsdb.benchmark_01`);
+2) A manually written parser which parses message by a fixed schema using byte operations on
+ source byte array (`tsdb.benchmark_02`);
+3) An improvement of manually written parses which does string interning - instead of parsing
+ string fields it matches string payload to unique id such that same payloads has same id
+ and different strings has different ids. It has two sub versions - one stores strings in a HashMap,
+ while another uses array (`tsdb.benchmark_03`);
+4) A concurrent version of the parser, which uses concurrent string interner to
+ have a synchronized view on string ids (`tsdb.benchmark_04`).
+
+The parser (with slight changes) is powering deserialization pipeline in Agoda's internal
+distributed high-load time-series database. `tsdb.deserialize.InterningAvroDeserializerArrayTags`
+ is the final version of the deserializer with `tsdb.interner.ConcurrentStringInterner` used for string interning.
 
 ### How to run benchmark
 

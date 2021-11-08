@@ -7,8 +7,27 @@ import tsdb.deserialize.sort.NoOpTagsSorter
 import tsdb.interner.StringInternerImpl
 import tsdb.measurement.MeasurementsState
 
-class InterningAvroDeserializeV2Spec extends BaseSpec {
-  "InterningAvroDeserializeV2" must {
+import scala.collection.JavaConverters._
+
+class InterningAvroDeserializerArrayTagsSpec extends BaseSpec {
+  "InterningAvroDeserializerArrayTags" must {
+    "deserialize a sample payload" in {
+      val measurementState = new MeasurementsState()
+      val interner = new StringInternerImpl()
+      val deserializer = new InterningAvroDeserializerArrayTags(interner)
+      val deserializedMeasurement = deserializer.deserialize(measurementState.measurementBytes)
+      assert(deserializedMeasurement.logtime == measurementState.measurement.getLogtime)
+      assert(interner.lookup(deserializedMeasurement.metric) == measurementState.measurement.getMetric)
+      assert(deserializedMeasurement.value == measurementState.measurement.getValue)
+      val deserializedTags = deserializedMeasurement.tags
+        .map(interner.lookup)
+        .grouped(2)
+        .map {
+          case Array(key, value) => key -> value
+        }
+        .toMap
+      assert(deserializedTags == measurementState.measurement.getTags.asScala)
+    }
     "sort tags" in {
       val interner = new StringInternerImpl()
       val sortDeserializer = new InterningAvroDeserializerArrayTags(interner)

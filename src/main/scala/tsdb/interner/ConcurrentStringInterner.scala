@@ -133,6 +133,8 @@ class ConcurrentStringInterner(private val bucketCount: Int) extends StringInter
     strings.get(id)
   }
 
+  override def size(): Index = nextFreeId.get() - 1 // id 0 is not used, hence the substraction
+
   protected def hashOf(s: Utf8String, offset: Int, length: Int): Int = {
     var result = 1
     var i = offset

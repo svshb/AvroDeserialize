@@ -16,13 +16,14 @@ abstract class CommonInternerSpecs extends BaseSpec {
       })
       val internedStrings = ids.map(interner.lookup)
       assert(internedStrings == strings)
+      assert(interner.size() == 5)
     }
     "use slice of string" in {
       val interner = createInterner()
       val string = "asd"
       val bytes = string.getBytes(StandardCharsets.UTF_8)
       val id = interner.intern(bytes, 1, 1)
-      assert(interner.lookup(id) == string.slice(1, 2))
+      assert(interner.lookup(id) == "s")
     }
   }
 }

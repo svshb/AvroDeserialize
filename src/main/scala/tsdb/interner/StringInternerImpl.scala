@@ -29,6 +29,8 @@ class StringInternerImpl extends StringInterner {
     )
     reverseMapping.get(id)
   }
+
+  override def size(): Int = reverseMapping.size()
 }
 
 class Utf8(val bytes: Array[Byte]) {

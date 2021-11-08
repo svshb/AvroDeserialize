@@ -20,4 +20,10 @@ trait StringInterner {
     * @return String if it was interned before, or null
     */
   def lookup(id: Int): String
+
+  /**
+    * Returns the size of string interner.
+    * @return amount of strings stored in this interner
+    */
+  def size(): Int
 }
